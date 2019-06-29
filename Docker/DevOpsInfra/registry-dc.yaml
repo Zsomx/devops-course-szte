@@ -1,0 +1,16 @@
+version: '3'
+services:
+  registry-srv:
+    image: registry
+    ports:
+      - 5000:5000
+    networks:
+      - ops_nw
+    volumes:
+      - reg_vol:/var/lib/registry
+volumes:
+  reg_vol:
+networks:
+  ops_nw:
+    external:
+      name: docker_ops_nw

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-alpine
+    ports:
+      - 8080:8080
+    volumes:
+      - 'jenkins_vol:/var/jenkinshome'
+    networks:
+      - ops_nw
+volumes:
+  jenkins_vol:
+networks:
+  ops_nw:

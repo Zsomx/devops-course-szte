@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages{
+        stage('Get source code'){
+            steps{
+                git url: 'https://github.com/Zsomx/express_example.git'
+            }
+        }
+        //Used plugin: https://wiki.jenkins.io/display/JENKINS/NodeJS+Plugin
+        stage('Install dependencies'){
+            steps{
+                nodejs(nodeJSInstallationName: 'node8') {
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Mocha testing'){
+            steps{
+                nodejs(nodeJSInstallationName: 'node8') {
+                    sh 'npm run-script test'
+                }
+            }
+        }
+    }
+}

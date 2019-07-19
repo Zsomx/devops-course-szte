@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages{
+        stage('Get image'){
+            steps{
+                git url: 'https://github.com/Zsomx/devops-course-szte.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                sh "docker build -t registry-srv:5000/nodeapp:latest -f ./Docker/app/Dockerfile"
+            }
+        }
+        stage('Deliver'){
+            steps{
+                sh "docker push registry-srv:5000/nodeapp:latest"
+            }
+        }
+    }
+}

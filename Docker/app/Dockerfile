@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-RUN apt update && apt install -y git
+RUN apk update && apk add git
 WORKDIR /opt
 RUN git clone 'https://github.com/Zsomx/express_example.git' && npm install
 WORKDIR /opt/express_example

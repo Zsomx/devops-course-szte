@@ -5,7 +5,7 @@ services:
     ports:
       - 8081:8080
     volumes:
-      - 'jenkins_vol:/var/jenkinshome'
+      - 'jenkins_vol:/var/jenkins_home'
     networks:
       - ops_nw
 volumes:

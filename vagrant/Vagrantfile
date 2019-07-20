@@ -15,12 +15,11 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
     end
     d.vm.provision "file", source: "./../docker/devopsinfra", destination: "/home/vagrant/docker"
-    d.vm.provision "shell", inline: "curl -s https://raw.githubusercontent.com/anchore/anchore-engine/master/docker-compose-dev.yaml -o /home/vagrant/docker/anchore.yaml"
     d.trigger.after [:up, :reload, :provision] do |t|
-      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/jenkins-dc.yaml up -d && docker-compose -f /home/vagrant/docker/registry-dc.yaml up -d && docker-compose -f /home/vagrant/docker/anchore.yaml up -d && docker-compose -f /home/vagrant/docker/sonar-dc.yaml up -d"}
+      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/jenkins-dc.yaml up -d && docker-compose -f /home/vagrant/docker/registry-dc.yaml up -d"}
     end
     d.trigger.before [:suspend, :destroy] do |t|
-      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/anchore.yaml down && docker-compose -f /home/vagrant/docker/registry-dc.yaml down &&  docker-compose -f /home/vagrant/docker/sonar-dc.yaml down && docker-compose -f /home/vagrant/docker/jenkins-dc.yaml down"}
+      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/registry-dc.yaml down && docker-compose -f /home/vagrant/docker/jenkins-dc.yaml down"}
     end
   end
   config.vm.define "app_server" do |app|
@@ -30,6 +29,8 @@ Vagrant.configure("2") do |config|
       v.memory = 1024
       v.cpus = 1
     end
+    app.vm.provision "file", source: "./../docker/app/daemon.json", destination: "/home/vagrant/"
+    app.vm.provision "shell", inline: 'sudo mv /home/vagrant/daemon.json /etc/docker/ && sudo service docker restart'
   end
 
 end

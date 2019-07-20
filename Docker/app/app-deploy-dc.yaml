@@ -1,7 +1,7 @@
 version: '3'
 services:
     server:
-        image: 192.168.2.3:5000/nodeapp:latest
+        image: 192.168.2.2:5000/nodeapp:latest
         ports:
             - 3000:3000
         networks:

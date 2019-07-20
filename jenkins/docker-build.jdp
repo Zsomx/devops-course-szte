@@ -3,17 +3,41 @@ pipeline {
     stages{
         stage('Get image'){
             steps{
-                git url: 'https://github.com/Zsomx/devops-course-szte.git'
+                sshagent(credentials : ['ops_base']) {
+                    sh '''ssh vagrant@192.168.2.2 \
+                    git clone "https://github.com/Zsomx/devops-course-szte.git" ${JOB_NAME}-${BUILD_NUMBER}
+                    '''
+                }
             }
         }
         stage('Build'){
             steps{
-                sh "docker build -t registry-srv:5000/nodeapp:latest -f ./Docker/app/Dockerfile"
+                sshagent(credentials : ['ops_base']) {
+                    sh '''ssh vagrant@192.168.2.2 \
+                    docker build -t localhost:5000/nodeapp:${BUILD_NUMBER} ./${JOB_NAME}-${BUILD_NUMBER}/Docker/app/
+                    '''
+                }
             }
         }
         stage('Deliver'){
             steps{
-                sh "docker push registry-srv:5000/nodeapp:latest"
+                sshagent(credentials : ['ops_base']) {
+                    sh '''ssh vagrant@192.168.2.2 \
+                    "docker tag localhost:5000/nodeapp:${BUILD_NUMBER} localhost:5000/nodeapp:latest && \
+                    docker push localhost:5000/nodeapp:${BUILD_NUMBER} && \
+                    docker push localhost:5000/nodeapp:latest"
+                    '''
+                }
+            }
+        }
+        stage('Clean up'){
+            steps{
+                sshagent(credentials : ['ops_base']) {
+                    sh '''ssh vagrant@192.168.2.2 \
+                    "docker rmi localhost:5000/nodeapp:${BUILD_NUMBER} localhost:5000/nodeapp:latest && \
+                    rm -r ${JOB_NAME}-${BUILD_NUMBER}"
+                    '''
+                }
             }
         }
     }

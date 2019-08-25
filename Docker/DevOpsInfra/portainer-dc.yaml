@@ -1,0 +1,18 @@
+version: '3'
+services:
+  portainer:
+    image: portainer/portainer
+    privileged: true
+    ports:
+      - 9001:9000
+    volumes:
+      - 'portainer_vol:/data'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    networks:
+      - ops_nw
+volumes:
+  portainer_vol:
+networks:
+  ops_nw:
+    external:
+      name: docker_ops_nw

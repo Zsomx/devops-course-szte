@@ -5,10 +5,14 @@ Vagrant.configure("2") do |config|
   ###VM specific###
   config.vm.define "ops_base" do |d|
     d.vm.network "private_network", ip: "192.168.2.2"
+    #Registry#
     d.vm.network "forwarded_port", guest: 5000, host: 5000
+    #Jenkins#
     d.vm.network "forwarded_port", guest: 8081, host: 8081
+    #Sonar#
     d.vm.network "forwarded_port", guest: 9000, host: 9000
-    d.vm.network "forwarded_port", guest: 8228, host: 8228
+    #Portainer
+    d.vm.network "forwarded_port", guest: 9001, host: 9001
     d.vm.provider "virtualbox" do |v|
       v.name = "OpVM"
       v.memory = 4096
@@ -16,10 +20,10 @@ Vagrant.configure("2") do |config|
     end
     d.vm.provision "file", source: "./../docker/devopsinfra", destination: "/home/vagrant/docker"
     d.trigger.after [:up, :reload, :provision] do |t|
-      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/jenkins-dc.yaml up -d && docker-compose -f /home/vagrant/docker/registry-dc.yaml up -d"}
+      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/jenkins-dc.yaml up -d && docker-compose -f /home/vagrant/docker/registry-dc.yaml up -d && docker-compose -f /home/vagrant/docker/portainer-dc.yaml up -d"}
     end
     d.trigger.before [:suspend, :destroy] do |t|
-      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/registry-dc.yaml down && docker-compose -f /home/vagrant/docker/jenkins-dc.yaml down"}
+      t.run_remote = {inline: "docker-compose -f /home/vagrant/docker/portainer-dc.yaml down && docker-compose -f /home/vagrant/docker/registry-dc.yaml down && docker-compose -f /home/vagrant/docker/jenkins-dc.yaml down"}
     end
   end
   config.vm.define "app_server" do |app|

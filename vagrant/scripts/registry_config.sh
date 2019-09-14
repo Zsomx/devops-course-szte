@@ -1,0 +1,1 @@
+sudo mv /home/vagrant/daemon.json /etc/docker/ && sudo service docker restart

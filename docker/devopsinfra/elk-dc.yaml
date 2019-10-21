@@ -11,6 +11,7 @@ services:
       - ops_nw
     volumes:
       - esdata:/usr/share/elasticsearch/data
+    restart: always
   kibana:
     image: "kibana:7.3.2"
     ports:
@@ -19,6 +20,7 @@ services:
       ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
     networks:
       - ops_nw
+    restart: always
 volumes:
   esdata:
 networks:

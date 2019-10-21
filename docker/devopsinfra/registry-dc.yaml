@@ -8,6 +8,7 @@ services:
       - ops_nw
     volumes:
       - reg_vol:/var/lib/registry
+    restart: always
 volumes:
   reg_vol:
 networks:

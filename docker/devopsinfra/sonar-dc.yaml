@@ -8,6 +8,7 @@ services:
       - 'sonar_vol:/opt/sonarqube'
     networks:
       - ops_nw
+    restart: always
 volumes:
   sonar_vol:
 networks:

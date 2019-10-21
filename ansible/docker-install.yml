@@ -14,7 +14,7 @@
           - docker
           - docker-engine
           - docker.io
-          - containerd 
+          - containerd
           - runc
     - name: Install requirements
       apt:
@@ -32,7 +32,7 @@
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
-    - name: Add Docker repository 
+    - name: Add Docker repository
       apt_repository:
         repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
         state: present

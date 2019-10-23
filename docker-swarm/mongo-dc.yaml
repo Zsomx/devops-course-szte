@@ -5,6 +5,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME:
       MONGO_INITDB_ROOT_PASSWORD:
+    volumes:
+      - mongodb_vol:/data/db
     deploy:
       mode: replicated
       replicas: 1
@@ -44,3 +46,5 @@ networks:
   stateless-network:
     external: true
     name: stateless-network
+volumes:
+  mongodb_vol:

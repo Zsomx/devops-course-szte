@@ -8,7 +8,8 @@ services:
     ports:
       - 1723:1723
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
       placement:
         constraints: 
           - node.labels.type == stateless

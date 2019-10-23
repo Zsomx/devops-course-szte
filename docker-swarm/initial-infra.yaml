@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  vpn:
+    image: mobtitude/vpn-pptp:1.0.4
+    privileged: true
+    volumes:
+      - ./vpn_secrets.txt:/etc/ppp/chap-secrets
+    ports:
+      - 1723:1723
+    deploy:
+      mode: global
+      placement:
+        constraints: 
+          - node.labels.type == stateless
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 30s
+    networks:
+      - stateless_network
+      - statefull-network
+networks:
+  stateless-network:
+    driver: overlay
+    attachable: true
+    name: stateless-network
+  statefull-network:
+    driver: overlay
+    attachable: true
+    name: statefull-network

@@ -1,0 +1,46 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo:4.2.0-bionic
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: 
+          - node.labels.type == statefull
+          - node.labels.db == true
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 2
+        window: 120s
+    networks:
+      - statefull-network
+  mongo-express:
+    image: mongo-express:0.49.0
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME:
+      ME_CONFIG_MONGODB_ADMINPASSWORD:
+    deploy:
+      mode: replicated
+      replicas: 3
+      placement:
+        constraints: 
+          - node.labels.type == stateless
+      restart_policy:
+        condition: any
+    networks:
+      - statefull-network
+      - stateless-network
+networks: 
+  statefull-network:
+    external: true
+    name: statefull-network
+  stateless-network:
+    external: true
+    name: stateless-network

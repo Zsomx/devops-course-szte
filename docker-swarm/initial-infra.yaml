@@ -1,0 +1,10 @@
+version: '3.7'
+networks:
+  stateless-network:
+    driver: overlay
+    attachable: true
+    name: stateless-network
+  statefull-network:
+    driver: overlay
+    attachable: true
+    name: statefull-network

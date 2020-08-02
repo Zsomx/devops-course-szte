@@ -11,8 +11,6 @@ Vagrant.configure("2") do |config|
     d.vm.network "forwarded_port", guest: 5601, host: 5601
     #Jenkins#
     d.vm.network "forwarded_port", guest: 8081, host: 8081
-    #Sonar#
-    d.vm.network "forwarded_port", guest: 9000, host: 9000
     #Portainer
     d.vm.network "forwarded_port", guest: 9001, host: 9001
     d.vm.provider "virtualbox" do |v|

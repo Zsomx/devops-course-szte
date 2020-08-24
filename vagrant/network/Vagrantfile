@@ -10,8 +10,8 @@ Vagrant.configure("2") do |config|
     end
     ns.vm.provision "shell", path: "bootstrap.sh"
     ns.vm.provision "shell", path: "app-deployment.sh"
-    d.trigger.after [:up, :reload] do |t|
-      t.run_remote = {inline: "cd express_example && npm start"}
+    ns.trigger.after [:up, :reload] do |t|
+      t.run_remote = {inline: "cd express_example && npm start &"}
     end
   end
   config.vm.define "apache_server" do |as|

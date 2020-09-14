@@ -1,47 +1,49 @@
 version: "3.5"
 
 volumes:
-  nextcloud-data:
-  nextcloud-db:
+  nextcloud_data:
+  nextcloud_db:
 
 networks:
-  nextcloud-nw:
+  nextcloud_nw:
 
 secrets:
-  mysql-pw:
+  mysql_pw:
     file: ./mysql_password.txt
-  nextcloud-pw:
+  nextcloud_pw:
     file: ./nextcloud_password.txt
 
 services:   
-  nextcloud-db:
+  nextcloud_db:
     image: mariadb:10.5
     environment:
       - MYSQL_DATABASE=nextclouddb
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_USER=nextcloudbot
-      - MYSQL_PASSWORD_FILE=/run/secrets/mysql-pw
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql_pw
     networks:
-      - nextcloud-nw
+      - nextcloud_nw
     volumes:
-      - nextcloud-db:/var/lib/mysql
+      - nextcloud_db:/var/lib/mysql
     secrets:
-      - mysql-pw
+      - mysql_pw
   nextcloud:
     image: nextcloud:19
+    depends_on: 
+      - nextcloud_db
     ports:
       - 8080:80
     environment:
       - NEXTCLOUD_ADMIN_USER=admin
-      - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud-pw
+      - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/nextcloud_pw
       - MYSQL_DATABASE=nextclouddb
       - MYSQL_USER=nextcloudbot
-      - MYSQL_PASSWORD_FILE=/run/secrets/mysql-pw
-      - MYSQL_HOST=nextcloud-db
+      - MYSQL_PASSWORD_FILE=/run/secrets/mysql_pw
+      - MYSQL_HOST=nextcloud_db
     networks:
-      - nextcloud-nw
+      - nextcloud_nw
     volumes:
-      - nextcloud-data:/var/www/html
+      - nextcloud_data:/var/www/html
     secrets:
-      - nextcloud-pw
-      - mysql-pw
+      - nextcloud_pw
+      - mysql_pw

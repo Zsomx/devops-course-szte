@@ -5,22 +5,17 @@ pipeline{
     stages {
         stage("Git clone"){
             steps{
-                sh "pwd"
                 git url:"https://github.com/Zsomx/express_example.git"
             }
         }
         stage("NPM install"){
             steps{
-                dir('express_example'){
-                    sh "npm i"
-                }
+                sh "npm i"
             }
         }
         stage("Test"){
             steps{
-                dir('express_example'){
-                    sh 'npm run-script test'
-                }
+                sh 'npm run-script test'
             }
         }
     }

@@ -6,6 +6,10 @@ networks:
   agent_network:
     driver: overlay
     attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.11.0/24
 
 volumes:
   portainer_data:

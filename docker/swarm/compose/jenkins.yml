@@ -7,6 +7,10 @@ networks:
   devops_nw:
     driver: overlay
     attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/24    
 
 services:
   jenkins:

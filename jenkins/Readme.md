@@ -4,6 +4,7 @@
 # Used agents
 - Image: jenkins/jnlp-agent-docker<br>
   Dir: /home/jenkins
+  User: root
   Env:
     - DOCKER_HOST: tcp://192.168.2.2:2376
 

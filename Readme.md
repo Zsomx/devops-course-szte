@@ -10,3 +10,8 @@ This material is used for education purposes at the University of Szeged (SZTE)
 ### Docker-Swarm environment
  - [Docker](https://docs.docker.com/) >= 19.03.4
  - [Docker-Compose](https://docs.docker.com/compose/) >= 1.26.2
+## Known issues:
+ - Sometimes the VirtualBox timezone changes and this colud cause a lot of trouble. To solve this add this command to the scripts [Source](https://stackoverflow.com/questions/33939834/how-to-correct-system-clock-in-vagrant-automatically):
+```
+$ sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Budapest /etc/localtime
+```

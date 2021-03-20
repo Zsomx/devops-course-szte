@@ -1,0 +1,17 @@
+pipeline{
+    agent {
+        label "docker-agent"
+    }
+    stages {
+        stage("Git clone"){
+            steps{
+                git url:"https://github.com/Zsomx/express_example.git", branch:"szte"
+            }
+        }
+        stage("Docker deploy"){
+            steps{
+                sh "docker stack deploy -c Docker-Compose.yml express_stack"
+            }
+        }
+    }
+}

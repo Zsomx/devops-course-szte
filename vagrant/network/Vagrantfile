@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "nodejs_server" do |ns|
+    ns.vm.box = "ubuntu/xenial64"
+    ns.vm.network "forwarded_port", guest: 3000, host: 8081, host_ip: "127.0.0.1"
+    ns.vm.network "private_network", ip: "192.168.33.10"
+    ns.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+      vb.cpus = 1
+      vb.name = "NodeJS Server"
+    end
+    ns.vm.provision "shell", path: "bootstrap.sh"
+    ns.vm.provision "shell", path: "app-deployment.sh"
+    ns.trigger.after [:up, :reload] do |t|
+      t.run_remote = {inline: "cd express_example && npm start &"}
+    end
+  end
+  config.vm.define "apache_server" do |as|
+    as.vm.box = "scotch/box"
+    as.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    as.vm.network "private_network", ip: "192.168.33.11"
+    as.vm.synced_folder "./html", "/var/www/public"
+    as.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+      vb.cpus = 1
+      vb.name = "LAMP Server"
+    end
+  end
+end

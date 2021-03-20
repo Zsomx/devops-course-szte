@@ -1,0 +1,36 @@
+Vagrant.configure("2") do |config|
+    ###Common for all###
+    config.vm.box = "file://./artifact/package.box"
+    config.vm.provision "file", source: "config/daemon.json", destination: "/home/vagrant/config/daemon.json"
+    config.vm.provision "file", source: "config/startup_options.conf", destination: "/home/vagrant/config/startup_options.conf"
+    # Copy has to be done using commands 'cause permission reasons.
+    config.vm.provision "shell", inline: "cp /home/vagrant/config/daemon.json /etc/docker/daemon.json "
+    config.vm.provision "shell", inline: "mkdir /etc/systemd/system/docker.service.d && cp /home/vagrant/config/startup_options.conf /etc/systemd/system/docker.service.d/startup_options.conf"
+    config.vm.provision "shell", path: "config/docker_service_reload.sh"
+    ###VM specific###
+    config.vm.define "ops_base" do |d|
+      # Jenkins UI
+      d.vm.network "forwarded_port", guest: 8081, host: 8081, host_ip: "127.0.0.1"
+      # Portainer UI
+      d.vm.network "forwarded_port", guest: 9000, host: 9000, host_ip: "127.0.0.1"
+      d.vm.network "private_network", ip: "192.168.2.2"
+      d.vm.synced_folder "../compose", "/home/vagrant/docker_resources"
+      d.vm.hostname = "ops-base"
+      d.vm.provider "virtualbox" do |v|
+        v.name = "OpVM"
+        v.memory = 2048
+        v.cpus = 2
+      end
+    end
+    config.vm.define "app_server" do |app|
+      app.vm.network "private_network", ip: "192.168.2.3"
+      # Express NodeJS app
+      app.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+      app.vm.hostname = "app-server"
+      app.vm.provider "virtualbox" do |v|
+        v.name = "AppVM"
+        v.memory = 1024
+        v.cpus = 1
+      end
+    end
+  end

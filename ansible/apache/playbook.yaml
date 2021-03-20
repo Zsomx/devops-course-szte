@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    delete: no
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        update_cache: yes
+        state: latest
+        install_recommends: yes
+      when: not delete
+    - name: HTML copy
+      copy:
+        src: ./html/sample.html
+        dest: /var/www/html
+        owner: vagrant
+        group: vagrant
+        mode: '0666'
+      when: not delete
+    - name: Delete Apache
+      apt:
+        name: apache2
+        state: absent
+      when: delete

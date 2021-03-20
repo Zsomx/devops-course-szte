@@ -1,0 +1,22 @@
+pipeline{
+    agent {
+        label "nodejs-agent"
+    }
+    stages {
+        stage("Git clone"){
+            steps{
+                git url:"https://github.com/Zsomx/express_example.git"
+            }
+        }
+        stage("NPM install"){
+            steps{
+                sh "npm i"
+            }
+        }
+        stage("Test"){
+            steps{
+                sh 'npm run-script test'
+            }
+        }
+    }
+}

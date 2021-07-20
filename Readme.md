@@ -1,4 +1,4 @@
-# DevOps & Cloud basics course materal 
+# DevOps & Cloud basics course material 
 ## Purpose
 This material is used for education purposes at the University of Szeged (SZTE)
 ## Prerequisits 

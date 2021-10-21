@@ -5,7 +5,10 @@ pipeline {
         stage('Get Docker-Compose'){
             steps{
                 sshagent(credentials : ['app_server']) {
-                    sh '''ssh vagrant@192.168.2.3 \
+                    sh '''\
+                    mkdir -p ~/.ssh
+                    ssh-keyscan -t rsa,dsa 192.168.2.3 >> ~/.ssh/known_hosts
+                    ssh vagrant@192.168.2.3 \
                     git clone "https://github.com/Zsomx/devops-course-szte.git" ${JOB_NAME}-${BUILD_ID}
                     '''
                 }

@@ -5,7 +5,10 @@ pipeline {
         stage('Get image'){
             steps{
                 sshagent(credentials : ['ops_base']) {
-                    sh '''ssh vagrant@192.168.2.2 \
+                    sh '''
+                    mkdir -p ~/.ssh
+                    ssh-keyscan -t rsa,dsa 192.168.2.2 >> ~/.ssh/known_hosts
+                    ssh vagrant@192.168.2.2 \
                     git clone "https://github.com/Zsomx/devops-course-szte.git" ${JOB_NAME}-${BUILD_NUMBER}
                     '''
                 }
@@ -15,7 +18,7 @@ pipeline {
             steps{
                 sshagent(credentials : ['ops_base']) {
                     sh '''ssh vagrant@192.168.2.2 \
-                    docker build -t localhost:5000/nodeapp:${BUILD_NUMBER} ./${JOB_NAME}-${BUILD_NUMBER}/docker/app/
+                    docker build -t localhost:5000/nodeapp:${BUILD_NUMBER} ./devops-workflow-example/${JOB_NAME}-${BUILD_NUMBER}/docker/app/
                     '''
                 }
             }

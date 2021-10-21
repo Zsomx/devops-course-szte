@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
     d.vm.network "forwarded_port", guest: 8081, host: 8081
     #Portainer
     d.vm.network "forwarded_port", guest: 9001, host: 9001
+    #Gitea
+    d.vm.network "forwarded_port", guest: 3000, host: 3000
     d.vm.provider "virtualbox" do |v|
       v.name = "OpVM"
       v.memory = 4096

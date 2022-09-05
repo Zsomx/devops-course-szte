@@ -3,3 +3,4 @@
 .vagrant/
 *.txt
 **/packer_cache
+site/

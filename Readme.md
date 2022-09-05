@@ -15,3 +15,7 @@ This material is used for education purposes at the University of Szeged (SZTE)
 ```
 $ sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 ```
+
+## Next-gen docs (preview)
+
+[GitHub pages](https://zsomx.github.io/devops-course-szte/)

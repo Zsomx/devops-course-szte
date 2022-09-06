@@ -16,3 +16,7 @@ The lecture notes & texts were written only in Hungarian right now.
 ```
 $ sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 ```
+
+## Next-gen docs (preview)
+
+[GitHub pages](https://zsomx.github.io/devops-course-szte/)

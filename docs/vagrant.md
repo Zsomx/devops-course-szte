@@ -21,7 +21,29 @@ Az egész DevOps nézetnek fontos eleme az áttekinthetőség. Ezt ebben az eset
 ## Vagrant
 Mindig a Vagrantfile-t olvassa fel. Ez egy Ruby fájl, melyhez egyedi parancsokat rendel a Vagrant (tehát egyfajta gemnek értelmezhető). Ezek az egyedi függvények a kiválasztott hypervisornak szóló parancsokká alakulnak a folyamat során. A kiindulás mindig egy meglévő VM (ebben a terminológiában **box**nak nevezzük) aminek a hardveres paramétereit módosítjuk majd parancsokat hajtunk végre rajta.
 
-Felmerülő problémák:
+**Fontosabb parancsok:**
+``` shell
+    vagrant help
+```
+Rendelkezésre álló parancsok és azok rövid leírása.
+``` shell
+    vagrant up
+```
+Az aktuális mappában található vagrantfile-t végrehajtja.
+``` shell
+    vagrant halt
+```
+Az aktuális mappában található vagrantfile által létrehozott VM-et megállítja.
+``` shell
+    vagrant destroy
+```
+ Az aktuális mappában található vagrantfile által létrehozott VM-et törli a hypervisorból.
+``` shell
+    vagrant provision
+```
+Az aktuális mappában található vagrantfile provision blokkjait újra végrehajtja.
+
+_Felmerülő problémák:_
 
  - Gitben tárolva hogyan kezeljünk jelszavakat, kulcsokat... stb.
  - Alap esetben kimeneti artifactot nem állít elő.

@@ -4,6 +4,7 @@ nav:
   - FAQ: faq.md
   - Linux alapok: linux.md
   - Vagrant: vagrant.md
+  - Ansible: ansible.md
 extra:
   collapse_toc: true
 markdown_extensions:

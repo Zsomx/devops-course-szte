@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+      - '*learning-material*'
+      - 'feature.doc*'
 
 jobs:
   build:

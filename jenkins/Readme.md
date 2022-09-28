@@ -6,7 +6,7 @@
   Dir: /home/jenkins
   User: root
   Env:
-    - DOCKER_HOST: tcp://192.168.2.2:2376
+    - DOCKER_HOST: tcp://192.168.5.2:2376
 
 - Image: jenkins/jnlp-agent-node<br>
   Dir: /home/node

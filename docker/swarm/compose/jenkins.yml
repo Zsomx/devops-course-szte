@@ -4,8 +4,8 @@ volumes:
   jenkins_home:
 
 networks:
-  devops_nw:
-    driver: overlay
+  devops_nw: # A hálózat neve cicd_devops_nw lesz, mert a stack neve automatikusan hozzáfűzésre kerül a Swarm által.
+    driver: overlay # Overlay hálózat egy speciális bridge hálózat. A 2 VM közt hoz létre egy egységes docker hálózatot.
     attachable: true
     ipam:
       driver: default
@@ -17,11 +17,12 @@ services:
     image: jenkins/jenkins:lts
     ports:
       - 8081:8080
+    #Swamr specifikus beállítások
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 1 # Hány db konténer fusson
       placement:
-        constraints:
+        constraints: # Csak azon a VMen fusson, ami devopsnode labellel rendelkezik
           - node.labels.cloudrole == devopsnode
     volumes:
       - jenkins_home:/var/jenkins_home 

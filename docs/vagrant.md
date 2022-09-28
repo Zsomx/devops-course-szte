@@ -10,7 +10,7 @@ Hypervisor típusok:
  - Type 1 vagy bare-metal: Itt az operációs rendszer feladata, hogy VM-eket futtasson a lehető legoptimálisabban. Nincsen sallang az OS-ben. Példa.: ESXi
  - Type 2: Ez egy már meglévő OS-re telepített program és nem különbözik a többi felhasználó által futtatott egyéb dolgoktól (Firefox, Word, Fortnite.exe). Példa: VirtualBox, Hyper-V, KVM
 
-A VM-ek minden esetben egy **teljesértékű operációs rendszert** futtatnak, külön kernellel, network stackel, user managementel stb.
+A VM-ek minden esetben egy **teljesértékű operációs rendszert** futtatnak, külön kernellel, network stackel, user managementel stb. A legtöbb esetben a VM egy virtuális hálózat mögött jön létre, így ha szervert futtatunk akkor a VM portját továbbítani kell a host gép egy tetszőleges, szabad portjára. 
 
 ## VM automatizálás
 ### Klasszikus eset

@@ -1,8 +1,11 @@
 Vagrant.configure("2") do |config|
+  # Kiindulási VM azaz Box
   config.vm.box = "scotch/box"
+  #A VM 80-as portját a host gép 8080-as portjára továbbítjuk DE csak localhost ip-vel.
   config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+  # Szinkron mappa létrehozása. A fájl melletti mappa tartalma és annak módosításai azonnal megjelennek a VM-ben.
   config.vm.synced_folder "./html", "/var/www/public"
-
+  # VM hardveres paraméterei Virtual Box hypervisorban
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "512"
     vb.cpus = 1

@@ -4,7 +4,7 @@
 A vagrantos jegyzetben már beszéltünk a VM-ekről, így ezekre most külön nem térünk ki. A konténerek esetén lényeges különbség, hogy a host OS kernele kerül megosztásra a guest rendszerrel. A hosttól történő izolációt maga a kernel oldja meg különböző szoftveres trükkökkel. <br>
 ![vm_vs_container](images/vm_vs_container.png)<br>
 <small>(Forrás: https://d1bbu1rz26yvjt.cloudfront.net/wp-content/uploads/2020/01/13200917/vm_vs_container-1170x550.png)</small><br>
-Ebből következik, hogy a konténerben csak olyan OS futhat ami a host rendszer kernele meg tud hajtani. Tehát megy Debian host futtathat RPM alapú Linux konténereket is, hiszen a kernelük egyezik.
+Ebből következik, hogy a konténerben csak olyan OS futhat ami a host rendszer kernele meg tud hajtani. Tehát egy Debian host futtathat RPM alapú Linux konténereket is, hiszen a kernelük egyezik.
 
 ### Minimal OS & distroless konténer
 Az __általunk tárgyalt Dockert használó konténerek__ nem teljesértékű operációs rendszereket tartalmaznak. Csak a legminimálisabb dolgokat tartalmazzák, melyek az adott szerver vagy alkalmazás futtatásához szükségesek.
@@ -23,12 +23,12 @@ Ha biztonságosan szeretnénk tárolni jelszavakat vagy kulcsokat a Dockerben, v
 A konténerek Docker imageből indulnak ki és ezekre építkezünk. Egy Docker fileban miután megjelöltük a kiinduló állapotot, különböző shell parancsokkal konfiguráljuk az általunk aztán buildelt imaget. A konténer ezt az buildet imaget klónozza és futtatja, példányosítja ha úgy tetszik. Természetesen vannak előre elkészített imagek, melyekre nem építkezünk hanem csak futtatjuk. Ilyenek például az adatbázisok, CMS rendszerek, Cloud drive alkalmazások... stb. 
 
 ### Folyamat
-1. Létrehozunk egy Dockerfilet és a kiindulási alapot addig módosítjuk míg az általunk futtatni kívánt kódot végre nem hajtja indításkor.
-2. Ezt a fájlt buildeljük \
+- Létrehozunk egy Dockerfilet és a kiindulási alapot addig módosítjuk míg az általunk futtatni kívánt kódot végre nem hajtja indításkor.
+- Ezt a fájlt buildeljük 
 ```
 docker build -t image_neve:verzio .
 ```
-3. Futtatjuk ezt az imaget.\
+- Futtatjuk ezt az imaget.
 ```
 docker run -d --name kontener_neve image_neve:verzio
 ```
@@ -40,7 +40,7 @@ Compose fájl futtatása:
 docker-compose -f compose-file.yml up -d
 ```
 <br>
-Compose fájl leállítása (a volumeokat és secreteket nem törlik):
+Compose fájl leállítása (a volumeokat és secreteket nem törli):
 ```
 docker-compose -f compose-file.yml down
 ```

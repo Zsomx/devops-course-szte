@@ -1,0 +1,22 @@
+version: '3.2'
+
+volumes:
+  jenkins_home:
+
+networks:
+  devops_nw:
+
+services:
+  jenkins:
+    image: devops/custom-jenkins
+    build:
+      context: .
+      dockerfile: jenkins.dockerfile
+    ports:
+      - 8081:8080
+    #volumes:
+    #  - jenkins_home:/var/jenkins_home
+    networks:
+      - devops_nw
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false

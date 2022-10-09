@@ -9,4 +9,4 @@ vagrant up
  - Add labels to these nodes.<br>
 The templates may help you.
 ## 3. Deploy stacks
-Deploy the 3 YAML files from the VM directory: /home/vagrant/docker_resources
+Deprecated

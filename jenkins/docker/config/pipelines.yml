@@ -47,18 +47,18 @@ jobs:
                             }
                             stage("Docker build"){
                                 steps{
-                                        sh "docker build -t ${params.imageName} ."
+                                        sh "docker build -t express ."
                                 }
                             }
                             stage("Docker push"){
                                 steps{
-                                    sh "docker tag ${params.imageName} 192.168.56.5:5000/${params.imageName}"   
-                                    sh "docker push 192.168.56.5:5000/${params.imageName}"
+                                    sh "docker tag express 192.168.56.5:5000/express"   
+                                    sh "docker push 192.168.56.5:5000/express"
                                 }
                             }
                             stage("Docker clean up"){
                                 steps{
-                                    sh "docker rmi -f ${params.imageName} 192.168.56.5:5000/${params.imageName}"   
+                                    sh "docker rmi -f express 192.168.56.5:5000/express"   
                                 }
                             }
                         }
@@ -76,14 +76,9 @@ jobs:
                         label "docker-agent"
                     }
                     stages {
-                        stage("Git clone"){
-                            steps{
-                                git url:"https://github.com/Zsomx/express_example.git", branch:"szte"
-                            }
-                        }
                         stage("Docker deploy"){
                             steps{
-                                sh "docker-compose -f Docker-Compose.yml up"
+                                sh "docker run -p 3000:3000 -d 192.168.56.5:5000/express"
                             }
                         }
                     }

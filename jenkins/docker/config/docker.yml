@@ -28,3 +28,28 @@ jenkins:
         remoteFs: "/home/node"
         retentionStrategy:
           idleMinutes: 1
+      - connector:
+          jnlp:
+            jnlpLauncher:
+              workDirSettings:
+                disabled: false
+                failIfWorkDirIsMissing: false
+                internalDir: "remoting"
+            user: root
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          dnsHosts:
+          - "8.8.8.8"
+          dnsString: "8.8.8.8"
+          image: "jenkins/jnlp-agent-docker"
+        instanceCapStr: "10"
+        labelString: "docker-agent"
+        nodeProperties:
+        - envVars:
+            env:
+            - key: "DOCKER_HOST"
+              value: "tcp://192.168.56.5:2376"
+        remoteFs: "/home/jenkins"
+        retentionStrategy:
+          idleMinutes: 1

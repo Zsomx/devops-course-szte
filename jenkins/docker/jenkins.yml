@@ -14,8 +14,9 @@ services:
       dockerfile: jenkins.dockerfile
     ports:
       - 8081:8080
-    #volumes:
-    #  - jenkins_home:/var/jenkins_home
+      - 50000:50000
+    volumes:
+      - ./config:/var/jenkins_home/casc_configs
     networks:
       - devops_nw
     environment:

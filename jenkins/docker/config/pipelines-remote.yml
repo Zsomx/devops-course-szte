@@ -1,0 +1,52 @@
+jobs:
+  - script: >
+        pipelineJob('CI - GIT') {
+          definition {
+              cpsScm {
+                scm {
+                  git {
+                    remote {
+                      url('https://github.com/Zsomx/express_example.git')
+                    }
+                    branch('*/2022.jenkins')
+                  }
+                }
+                lightweight()
+                scriptPath('ci.jenkinsfile')
+              }
+            }
+          }
+  - script: >
+        pipelineJob('CD - GIT') {
+          definition {
+              cpsScm {
+                scm {
+                  git {
+                    remote {
+                      url('https://github.com/Zsomx/express_example.git')
+                    }
+                    branch('*/2022.jenkins')
+                  }
+                }
+                lightweight()
+                scriptPath('cd.jenkinsfile')
+              }
+            }
+          }
+  - script: >
+        pipelineJob('Deploy - GIT') {
+          definition {
+              cpsScm {
+                scm {
+                  git {
+                    remote {
+                      url('https://github.com/Zsomx/express_example.git')
+                    }
+                    branch('*/2022.jenkins')
+                  }
+                }
+                lightweight()
+                scriptPath('deploy.jenkinsfile')
+              }
+            }
+          }

@@ -1,7 +1,7 @@
 
 jobs:
   - script: >
-      pipelineJob('CI') {
+      pipelineJob('CI - LOCAL') {
         definition {
             cps {
               script("""\
@@ -31,7 +31,7 @@ jobs:
          }
       }
   - script: >
-      pipelineJob('CD') {
+      pipelineJob('CD - LOCAL') {
         definition {
             cps {
               script("""\
@@ -67,7 +67,7 @@ jobs:
          }
       }
   - script: >
-      pipelineJob('Deployment') {
+      pipelineJob('Deployment - LOCAL') {
         definition {
             cps {
               script("""\
@@ -78,7 +78,8 @@ jobs:
                     stages {
                         stage("Docker deploy"){
                             steps{
-                                sh "docker run -p 3000:3000 -d 192.168.56.5:5000/express"
+                                sh "docker rm -f express || true"
+                                sh "docker run --name express -p 3000:3000 -d 192.168.56.5:5000/express"
                             }
                         }
                     }

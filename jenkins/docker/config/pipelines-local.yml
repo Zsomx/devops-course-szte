@@ -59,9 +59,7 @@ jobs:
                         }
                         post {
                             always {
-                                steps{
-                                    sh "docker rmi -f express 192.168.56.5:5000/express" 
-                                }
+                                sh "docker rmi -f express 192.168.56.5:5000/express" 
                             }
                         }
                     }""".stripIndent())

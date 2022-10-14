@@ -1,0 +1,89 @@
+
+jobs:
+  - script: >
+      pipelineJob('CI - LOCAL') {
+        definition {
+            cps {
+              script("""\
+                pipeline{
+                  agent {
+                      label "nodejs-agent"
+                  }
+                  stages {
+                      stage("Git clone"){
+                          steps{
+                              git url:"https://github.com/Zsomx/express_example.git"
+                          }
+                      }
+                      stage("NPM install"){
+                          steps{
+                              sh "npm i"
+                          }
+                      }
+                      stage("Test"){
+                          steps{
+                              sh 'npm run-script test'
+                          }
+                      }
+                  }
+                }""".stripIndent())
+              }
+         }
+      }
+  - script: >
+      pipelineJob('CD - LOCAL') {
+        definition {
+            cps {
+              script("""\
+                    pipeline{
+                        agent {
+                            label "docker-agent"
+                        }
+                        stages {
+                            stage("Git clone"){
+                                steps{
+                                    git url:"https://github.com/Zsomx/express_example.git", branch:"szte"
+                                }
+                            }
+                            stage("Docker build"){
+                                steps{
+                                        sh "docker build -t express ."
+                                }
+                            }
+                            stage("Docker push"){
+                                steps{
+                                    sh "docker tag express 192.168.56.5:5000/express"   
+                                    sh "docker push 192.168.56.5:5000/express"
+                                }
+                            }
+                            stage("Docker clean up"){
+                                steps{
+                                    sh "docker rmi -f express 192.168.56.5:5000/express"   
+                                }
+                            }
+                        }
+                    }""".stripIndent())
+              }
+         }
+      }
+  - script: >
+      pipelineJob('Deployment - LOCAL') {
+        definition {
+            cps {
+              script("""\
+                    pipeline{
+                    agent {
+                        label "docker-agent"
+                    }
+                    stages {
+                        stage("Docker deploy"){
+                            steps{
+                                sh "docker rm -f express || true"
+                                sh "docker run --name express -p 3000:3000 -d 192.168.56.5:5000/express"
+                            }
+                        }
+                    }
+                }""".stripIndent())
+              }
+         }
+      }

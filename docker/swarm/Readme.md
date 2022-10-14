@@ -4,7 +4,6 @@
 cd vms && packer build packer.json
 vagrant up
 ```
-<<<<<<< HEAD
 ## 2. Swarm klaszter létrehozása
 OpsBase VM beállítása: <br>
 Az init parancs ki fog írni egy parancsot, amit fel kell használjunk így mentsük el valahova.
@@ -34,11 +33,3 @@ docker stack deploy -c portainer.yml portainer
 docker stack deploy -c registry.yml registry
 ```
 A localhost:9000 web címen megjelenik a Portainer, a localhost:8081 címen a Jenkins. 
-=======
-## 2. Create cluster
- - Init the cluster on OpVM then join the AppVM.
- - Add labels to these nodes.<br>
-The templates may help you.
-## 3. Deploy stacks
-Deprecated
->>>>>>> origin/2022.learning-material

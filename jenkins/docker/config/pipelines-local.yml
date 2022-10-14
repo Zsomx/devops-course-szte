@@ -56,9 +56,11 @@ jobs:
                                     sh "docker push 192.168.56.5:5000/express"
                                 }
                             }
-                            stage("Docker clean up"){
+                        }
+                        post {
+                            always {
                                 steps{
-                                    sh "docker rmi -f express 192.168.56.5:5000/express"   
+                                    sh "docker rmi -f express 192.168.56.5:5000/express" 
                                 }
                             }
                         }

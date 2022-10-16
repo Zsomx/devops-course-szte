@@ -6,6 +6,7 @@ nav:
   - Vagrant: vagrant.md
   - Ansible: ansible.md
   - Docker: docker.md
+  - Jenkins: jenkins.md
 extra:
   collapse_toc: true
 markdown_extensions:

@@ -1,3 +1,4 @@
+# Docker agent definiálás a Jenkinshez
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -6,7 +7,7 @@ jenkins:
   - docker:
       dockerApi:
         dockerHost:
-          uri: "tcp://192.168.56.5:2376"
+          uri: "tcp://192.168.56.5:2376" # Docker API elérése a VM-ben. Ezzel kommunákál a Jenkins a pipelineok futtatásakor használt konténerek létrehozásához és törléséhez.
       name: "docker"
       templates:
       - connector:
@@ -22,9 +23,9 @@ jenkins:
           dnsHosts:
           - "8.8.8.8"
           dnsString: "8.8.8.8"
-          image: "jenkins/jnlp-agent-node"
+          image: "jenkins/jnlp-agent-node" # Docker image NodeJS pipeline futtatásához
         instanceCapStr: "10"
-        labelString: "nodejs-agent"
+        labelString: "nodejs-agent" # Label ami alapján a pipeline hivatkozik erre az agentre, hogy ebben fusson.
         remoteFs: "/home/node"
         retentionStrategy:
           idleMinutes: 1
@@ -42,13 +43,13 @@ jenkins:
           dnsHosts:
           - "8.8.8.8"
           dnsString: "8.8.8.8"
-          image: "jenkins/jnlp-agent-docker"
+          image: "jenkins/jnlp-agent-docker" # Docker image Docker API eléréshez PIPELINE szinten.
         instanceCapStr: "10"
-        labelString: "docker-agent"
+        labelString: "docker-agent" # Label ami alapján a pipeline hivatkozik erre az agentre, hogy ebben fusson.
         nodeProperties:
         - envVars:
             env:
-            - key: "DOCKER_HOST"
+            - key: "DOCKER_HOST" # Környezeti változó, a Docker API elérésének tárolására.
               value: "tcp://192.168.56.5:2376"
         remoteFs: "/home/jenkins"
         retentionStrategy:

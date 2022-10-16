@@ -1,4 +1,4 @@
-
+# Pipeline comments: https://github.com/Zsomx/express_example/tree/2022.jenkins
 jobs:
   - script: >
       pipelineJob('CI - LOCAL') {
@@ -56,10 +56,10 @@ jobs:
                                     sh "docker push 192.168.56.5:5000/express"
                                 }
                             }
-                            stage("Docker clean up"){
-                                steps{
-                                    sh "docker rmi -f express 192.168.56.5:5000/express"   
-                                }
+                        }
+                        post {
+                            always {
+                                sh "docker rmi -f express 192.168.56.5:5000/express" 
                             }
                         }
                     }""".stripIndent())

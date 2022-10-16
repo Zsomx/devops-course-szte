@@ -1,19 +1,24 @@
 Vagrant.configure("2") do |config|
+  #NODE JS VM létrehozása
   config.vm.define "nodejs_server" do |ns|
     ns.vm.box = "ubuntu/xenial64"
     ns.vm.network "forwarded_port", guest: 3000, host: 8081, host_ip: "127.0.0.1"
+    # Virtual Box belső hálozatára csatlakoztatása és IP adása (másik VM direkt elérése)
     ns.vm.network "private_network", ip: "192.168.33.10"
     ns.vm.provider "virtualbox" do |vb|
       vb.memory = "512"
       vb.cpus = 1
       vb.name = "NodeJS Server"
     end
+    # Shell fájlok futtatása provision esetén (azaz CSAK az első boot után)
     ns.vm.provision "shell", path: "bootstrap.sh"
     ns.vm.provision "shell", path: "app-deployment.sh"
+    # Bekapcsolás esetén automatikusan elindítja a NodeJS szerver alkalmazást
     ns.trigger.after [:up, :reload] do |t|
       t.run_remote = {inline: "cd express_example && npm start &"}
     end
   end
+  #APACHE VM létrehozása
   config.vm.define "apache_server" do |as|
     as.vm.box = "scotch/box"
     as.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"

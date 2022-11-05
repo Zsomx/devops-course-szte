@@ -21,4 +21,4 @@
           chmod +x /usr/local/bin/argocd
           sleep 2m
           kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d > ~/argocdadmin.txt
-
+          kubectl apply -n argocd -f /opt/kubernetes/argocd/argocd-nodeport.yml

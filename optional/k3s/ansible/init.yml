@@ -1,0 +1,24 @@
+---
+  - hosts: all
+    become: yes
+    vars:
+      use_docker: no
+    tasks: 
+      - name: Install Docker
+        shell: curl https://releases.rancher.com/install-docker/19.03.sh | sh
+        when: use_docker
+      - name: Install K3s for Docker
+        shell:  curl -sfL https://get.k3s.io | sh -s - --docker
+        when: use_docker
+      - name: Install K3s with containerd
+        shell: curl -sfL https://get.k3s.io | sh -
+        when: not use_docker
+      - name: Install ArgoCD
+        shell: |
+          kubectl create namespace argocd
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+          sleep 2m
+          kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d > ~/argocdadmin.txt
+          kubectl apply -n argocd -f /opt/kubernetes/argocd/argocd-nodeport.yml

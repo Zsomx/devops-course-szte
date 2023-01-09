@@ -23,7 +23,7 @@ jobs:
     # A defaults szekció használatával nem kell minden stepben megadni a felsorolt paramétereket
     defaults:
       run:
-        working-directory: ./gh-actions-example
+        working-directory: ./optional/gh-actions-example
 
     # Példa egy párhuzamosan három OS-en is lefutó buildre
     # A matrix statégiát nem csak OS-re, hanem más változóra is alkalmazhatjuk

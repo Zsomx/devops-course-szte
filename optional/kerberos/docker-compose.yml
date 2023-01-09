@@ -1,0 +1,38 @@
+# source: https://www.confluent.io/blog/containerized-testing-with-kerberos-and-ssh/
+version: "2"
+services:
+  kdc-server:
+    hostname: 'kdc-server'
+    container_name: kdc-server
+    build: ./kdc-server
+    volumes:
+      # This is needed otherwise there won't be enough entropy to generate a new kerberos realm
+      - /dev/urandom:/dev/random
+      - ./kerberos:/root/kerberos
+    ports:
+      - "749:749"
+      - "88:88/udp"
+    networks:
+      - knw
+  ssh-server:
+    hostname: 'ssh-server'
+    container_name: ssh-server
+    volumes:
+      - ./kerberos:/root/kerberos
+    build: ./ssh-container
+    ports:
+      - "2222:22"
+    entrypoint: /usr/sbin/sshd -D
+    networks:
+      - knw
+  ssh-client:
+    hostname: 'ssh-client'
+    container_name: ssh-client
+    build: ./ssh-container
+    entrypoint: /bin/bash 
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks:
+      - knw
+networks:
+  knw:

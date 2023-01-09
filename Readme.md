@@ -1,6 +1,7 @@
 # DevOps & Cloud basics course material 
 ## Purpose
-This material is used for education purposes at the University of Szeged (SZTE)
+This material is used for education purposes at the University of Szeged (SZTE).
+The lecture notes & texts were written only in Hungarian right now.
 ## Prerequisits 
 ### Vagrant environment
  - [VirtualBox](https://www.virtualbox.org/) = 6.0.12

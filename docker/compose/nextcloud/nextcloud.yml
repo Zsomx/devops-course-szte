@@ -6,7 +6,8 @@ volumes:
 
 networks:
   nextcloud_nw:
-
+# A jelszavak generálásához futtassuk a secret-gen.sh fájlt.
+# Secret objektumok létrehozása jelszavak tárolására
 secrets:
   mysql_pw:
     file: ./mysql_password.txt
@@ -25,8 +26,9 @@ services:
       - nextcloud_nw
     volumes:
       - nextcloud_db:/var/lib/mysql
+    # Fentebb létrehozott secret felhasználása
     secrets:
-      - mysql_pw
+      - mysql_pw # /run/secrets/mysql_pw fájlként képződik le, fentebb MYSQL_PASSWORD_FILE változót használva fogja kiolvasni a MariaDB a tartalmát
   nextcloud:
     image: nextcloud:19
     depends_on: 

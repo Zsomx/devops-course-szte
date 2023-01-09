@@ -1,0 +1,8 @@
+configuration-as-code 
+blueocean 
+job-dsl 
+pipeline-utility-steps 
+generic-webhook-trigger 
+git-changelog
+docker-plugin
+pipeline-stage-view

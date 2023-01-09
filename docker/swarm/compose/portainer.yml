@@ -23,7 +23,7 @@ services:
     networks:
       - agent_network
     deploy:
-      mode: global
+      mode: global # Minden VM-en fusson 1 és csak 1 agent konténer
       placement:
         constraints:
           - node.platform.os == linux

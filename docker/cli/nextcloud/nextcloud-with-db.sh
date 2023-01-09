@@ -1,6 +1,8 @@
 docker network create nextcloud-nw
 docker volume create nextcloud-data
 docker volume create nextcloud-db
+# --net specifikus docker hálózathoz kapcsolása
+# -d detached mód, meg marad a shell prompt
 docker run -d --name mariadb-nc -e MYSQL_RANDOM_ROOT_PASSWORD="yes" \
 -e MYSQL_DATABASE="nextclouddb" -e MYSQL_USER="nextcloudbot" \
 -e MYSQL_PASSWORD="ncbotpw" -v nextcloud-db:/var/lib/mysq \

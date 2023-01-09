@@ -1,0 +1,8 @@
+jenkins:
+  systemMessage: "SZTE DevOps Course"
+  numExecutors: 4
+  scmCheckoutRetryCount: 2
+  mode: NORMAL
+unclassified:
+  location:
+    url: "http://192.168.56.5:8081/"

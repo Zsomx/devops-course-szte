@@ -1,0 +1,79 @@
+---
+# Ezen a néven fogja a UI megjeleníteni a workflowt
+name: NodeJS CI
+
+# Események melyek esetén lefut a workflow
+on:
+  push:
+    branches: [ "mymainbranch", "test*" ]
+    tags: [ "v1.*" ]
+  pull_request:
+    branches: [ "mymainbranch" ]
+
+# A workflowhoz tartozó job(ok)
+jobs:
+  # Adott job neve szabadon választott
+  build:
+    # Runner: futtató környezet
+    # Github infrastruktúrán futó runner pl: ubuntu-latest, windows-latest, macos-latest
+    # Saját magunk által hosztolt runner: self-hosted
+    runs-on: ubuntu-latest 
+
+    # Adott mappában fog futni minden további lépés
+    # A defaults szekció használatával nem kell minden stepben megadni a felsorolt paramétereket
+    defaults:
+      run:
+        working-directory: ./optional/gh-actions-example
+
+    # Példa egy párhuzamosan három OS-en is lefutó buildre
+    # A matrix statégiát nem csak OS-re, hanem más változóra is alkalmazhatjuk
+    # strategy:
+    #   matrix:
+    #     os: [ubuntu-latest, macOS-latest, windows-latest]    
+    # runs-on: ${{ matrix.os }}
+
+    # Jobhoz tartozó lépések
+    steps:
+    # A forráskód klónozása
+    # https://github.com/actions alá tartozó beépített action
+    - uses: actions/checkout@v3
+
+    # NodeJS környezet előkészítése a további lépésekhez
+    # Szintén "gyári" actiont használunk
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      # Minden actiont a with szekcióban paraméterezünk
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    # Shell parancs futtatása
+    - name: NPM install packages
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+    
+    # Docker build
+    # Felhasználjuk a GitHub által beállított környezeti változókat.
+    # https://docs.github.com/en/actions/learn-github-actions/environment-variables
+    - name: Build Docker image
+      run: |
+        docker build --tag ${{ github.repository }}:${GITHUB_SHA::6} .
+        docker tag ${{ github.repository }}:${GITHUB_SHA::6} ${{ github.repository }}:latest
+
+    # Biztonsági statikus analízis az elkészült docker image-en.
+    # Az anchore scannert használjuk, az anchore által írt action-nel
+    - name: Scan image
+      uses: anchore/scan-action@v3
+      id: scan
+      with:
+        image: ${{ github.repository }}:latest
+        fail-build: false
+
+    # Az ellenőrzés eredményét feltöltjük szabványos SARIF formátumban
+    # A repository-nk Security tabján a Code Scanning alatt fog megjelenni az eredmény
+    - name: Upload scan report
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}

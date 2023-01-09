@@ -6,7 +6,7 @@ volumes:
 networks:
   devops_nw:
     external:
-      name: cicd_devops_nw
+      name: cicd_devops_nw #Meglévő hálózat neve (Jenkins YAML hozta létre.) Info: jenkins.yml
 
 services:
   registry:

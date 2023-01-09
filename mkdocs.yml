@@ -2,6 +2,11 @@ site_name: SZTE DevOps Course
 nav:
   - Home: index.md
   - FAQ: faq.md
+  - Linux alapok: linux.md
+  - Vagrant: vagrant.md
+  - Ansible: ansible.md
+  - Docker: docker.md
+  - Jenkins: jenkins.md
 extra:
   collapse_toc: true
 markdown_extensions:

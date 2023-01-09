@@ -1,9 +1,10 @@
 ---
-- hosts: all
-  become: yes
+- hosts: all # Inventory összes elemét kiválasztjuk
+  become: yes # Root felhasználóként fog tevékenykedni a playbook
   vars:
-    delete: no
+    delete: no # A taskok when feltételei ennek az értéknek megfelelően futtatják vagy kihagyják a futtatást. 
   tasks:
+    # Apache csomag telepítése APT csomagkezelővel
     - name: Install Apache
       apt:
         name: apache2
@@ -11,6 +12,7 @@
         state: latest
         install_recommends: yes
       when: not delete
+    # Helyi HTML fájl másolása a szerverre
     - name: HTML copy
       copy:
         src: ./html/sample.html
@@ -19,6 +21,7 @@
         group: vagrant
         mode: '0666'
       when: not delete
+    # Apache törlése az APTvel.
     - name: Delete Apache
       apt:
         name: apache2

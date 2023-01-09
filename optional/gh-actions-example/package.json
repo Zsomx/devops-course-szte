@@ -1,0 +1,22 @@
+{
+  "name": "igor-actions-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Test successful\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igormedo/igor-actions-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igormedo/igor-actions-test/issues"
+  },
+  "homepage": "https://github.com/igormedo/igor-actions-test#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

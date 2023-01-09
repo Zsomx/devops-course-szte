@@ -1,0 +1,10 @@
+version: '3.2'
+volumes:
+  registry_data:
+services:
+  registry:
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+      - registry_data:/var/lib/registry

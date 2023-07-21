@@ -2,7 +2,7 @@
 
 **Hogy lesz az osztályozás?**
 
-Beadandó feladatok formájában, melyekre 1 hónap elkészítési idő áll rendelkezésre. Időben nem beadott feladatokkal nem teszünk kivételt, még ha csak 1 percel is csúsztál le.
+ UNDER DEVELOPMENT
 
 **Kötelező bejárni?**
 

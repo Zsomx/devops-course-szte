@@ -1,10 +1,10 @@
 # Jenkins
 ## CI/CD
-A Jenkins elsődlegesen a CI eszköz. Feladata, hogy a gitben található kódokra trigger esemény hatására (polling, push, pull request) checkoutolja a kódot és ezekre teszteket futtasson. Hogy pontosan mit és hogyan, azt pipeline fájlban definiáljuk. A CI akkor hatékony, ha minden push eseményre lefuttatja az alapvető teszteket. <br>
+A Jenkins elsődlegesen a CI (Continouos Integrity) eszköz. Feladata, hogy a gitben található kódokra trigger esemény hatására (polling, push, pull request) checkoutolja és ezekre teszteket futtasson. Hogy pontosan mit és hogyan, azt pipeline fájlban definiáljuk. A CI akkor hatékony, ha minden push eseményre lefuttatja az alapvető teszteket. <br>
 A CD (akár Delivery, akár Deployment) nem szorosan a Jenkins feladata azonban a gyakorlatban gyakran arra is használják így ezt mi bemutatjuk.<br>
 _Megjegyzés_: A kurzus során nem fogunk triggereket bemutatni, mivel lokális környezetben a beadandók írása során voltak technikai nehézségek. GitHub Actions és GitLab esetén kerül majd bemutatásra.
-## Job és pipeline
-A Jenkinsben elsőként jobokat hozunk létre. Ezek sokmindent definiálhatnak, azonban számunkra most 2 dolog nagyon fontos: a triggereket és a pipeline. A triggerek definiálásával ezek bekövetkezésekor a megadott helyen megkeresi és lefuttatja a pipeline kódot. A pipeline egy egyszerűsített Groovy kód, mely a Jenkinsel kommunikálva különböző feladatokat hajt végre. Ilyen feladat a kód checkoutolása, függőségeinek telepítése, kód tesztelése valamilyen formában... stb. <br>
+## Job és pipeline közti különbség
+A job és a pipeline fogalma összemosódhat egyes esetekben. A legkézenfekvőbb különbség, hogy a job az ami definiálja a pipeline kódjának elérését és futtatását. Az oka ami miatt összemósódik a két fogalom gyakran, hogy rengeteg dolog a pipelineból is módosítható ami alapvetően a jobhoz tartozik.
 ### Pipeline felépítése
 Struktúrális:
  - agent: Definiálja a pipelinet futtató nodeot. A mi példánkban ezek Docker agentek lesznek.
@@ -16,7 +16,7 @@ Műveletek:
 ### Job definiálása kódból (Jenkins Configuration as Code)
 A letebb látható kódok létrehozhatók a felületen is. New item --> Pipeline. A következő oldal alján választhatjuk ki, hogy Pipeline script (azaz helyben, a Jenkinsen írt és tárolt) vagy Pipeline script from SCM (source code management, azaz gitben tárolt) beállításokat használjunk.<br>
 A jobok kódból történő definiálását a Configuration as Code plugin támogatja.
-#### Pipeline beolvasása gitből
+#### Pipeline beolvasása gitből Job definitional
 ```
 pipelineJob('CI - GIT') {
 definition {
@@ -40,7 +40,7 @@ A konfiguráció részleteinek megértése nincs a kurzus keretei közt, ami fon
  - branch: az adott repó branchét definiálja ahol a pipeline fájl található
  - lightweight(): azt valósítja meg, hogy a Job futásakor CSAK a pipeline kód kerül letöltésre, nem az egész repó
  - scriptPath('filename'): az adott nevű pipeline fájlt fogja letölteni és végrehajtani a job
-#### Pipeline beolvasása Job definícióból
+#### Pipeline beégetve Job definitionba
 ```
 pipelineJob('CI - LOCAL') {
 definition {

@@ -11,10 +11,10 @@ Az __általunk tárgyalt Dockert használó konténerek__ nem teljesértékű op
 
 ## Komponensek
 ### Docker hálózat
-A kurzus során a birdge hálózat típust fogjuk használni. Ez azt jelenti, hogy a konténerek egy virtuális, szeparált hálózathoz kapcsolódnak. A dockerrel fogjuk szabályozni, hogy az egyes konténerek portjai a host gép mely portjaira továbbítódjanak.
+A kurzus során a birdge hálózat típust fogjuk használni. Ez azt jelenti, hogy a konténerek egy virtuális, szeparált hálózathoz kapcsolódnak. A dockerrel fogjuk szabályozni, hogy az egyes konténerek portjai a host gép mely portjaira továbbítódjanak. Ezen a porton lehet majd elérni azokat akár a hostról akár a hálózatról.
 
 ### Volume
-A konténerek fontos tulajdonsága, hogy könnyen eldobhatóak és újra létrehozhatóak. Azonban amikor nem stateless egy konténer, például adatbázist futtatunk benne, akkor valahogy az adatoknak túl kell élni a konténert. Erre a volume a megoldás. Kijelölünk egy fájlt vagy mappát a konténerben és egy docker volumera kötjük. Ekkor ez a fájl vagy mappa a konténer által izolált területen kívülre kerül és így megmarad a konténer megszűnése után is.
+A konténerek fontos tulajdonsága, hogy könnyen eldobhatóak és újra létrehozhatóak. Azonban amikor nem stateless egy konténer, például adatbázist futtatunk benne, akkor valahogy az adatoknak **túl kell élni a konténer lecserélését**. Erre a volume a megoldás. Kijelölünk egy fájlt vagy mappát a konténerben és egy docker volumera kötjük. Ekkor ez a fájl vagy mappa a konténer által izolált területen kívülre kerül a host gépen és így megmarad a konténer megszűnése után is.
 
 ### Secret
 Ha biztonságosan szeretnénk tárolni jelszavakat vagy kulcsokat a Dockerben, valamint ezeket fel szeretnénk használni egy-egy konténerben, akkor secret objektumokat definiálunk. Ezek titkosítva tárolják az adatokat, a konténerbe pedig titkosítatlan szöveges fájl formájában teszik elérhetővé ezeket.
@@ -24,13 +24,13 @@ A konténerek Docker imageből indulnak ki és ezekre építkezünk. Egy Docker 
 
 ### Folyamat
 - Létrehozunk egy Dockerfilet és a kiindulási alapot addig módosítjuk míg az általunk futtatni kívánt kódot végre nem hajtja indításkor.
-- Ezt a fájlt buildeljük 
+- Ezt a fájlt buildeljük. A ___verzió___ jelölés hivatalos angol neve a ___tag___, viszont így érthetőbb a funkciója.
 ```
-docker build -t image_neve:verzio .
+docker build -t ___image_neve:verzio___ .
 ```
 - Futtatjuk ezt az imaget.
 ```
-docker run -d --name kontener_neve image_neve:verzio
+docker run -d --name ___kontener_neve___ ___image_neve:verzio___
 ```
 
 ## Docker-Compose

@@ -38,7 +38,7 @@ Ma már a **systemctl** az uralkodó ezen területen, azonban néhol fel-fel buk
 
 **Fontosabb parancsok**
 
- - service program-neve start
- - service program-neve stop
- - service program-neve restart
- - service program-neve status
+ - service ___program-neve___ start
+ - service ___program-neve___ stop
+ - service ___program-neve___ restart
+ - service ___program-neve___ status

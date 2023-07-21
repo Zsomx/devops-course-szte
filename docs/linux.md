@@ -16,9 +16,9 @@ Ez a SystemD nevű program CLI eszköze. Az óra rövidsége és fókuszáltság
 - Inializálja az egész OS-t
 - Unitokat kezel, számunkra a service típusú unit lesz érdekes
 - Unit definíciós fájlok 3 helyen találhatóak a Linuxon. Precedencia szint szerint:
-   - /etc/systemd/system
-   - /run/systemd/system
-   - /lib/systemd/system
+    - /etc/systemd/system
+    - /run/systemd/system
+    - /lib/systemd/system
 
 **Fontosabb parancsok**
 

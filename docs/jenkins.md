@@ -7,12 +7,15 @@ _Megjegyzés_: A kurzus során nem fogunk triggereket bemutatni, mivel lokális 
 A job és a pipeline fogalma összemosódhat egyes esetekben. A legkézenfekvőbb különbség, hogy a job az ami definiálja a pipeline kódjának elérését és futtatását. Az oka ami miatt összemósódik a két fogalom gyakran, hogy rengeteg dolog a pipelineból is módosítható ami alapvetően a jobhoz tartozik.
 ### Pipeline felépítése
 Struktúrális:
- - agent: Definiálja a pipelinet futtató nodeot. A mi példánkban ezek Docker agentek lesznek.
- - stages & stage: fázisok definiálása
- - step: stagen belüli legelemibb műveletek blokkja
+
+- agent: Definiálja a pipelinet futtató nodeot. A mi példánkban ezek Docker agentek lesznek.
+- stages & stage: fázisok definiálása
+- step: stagen belüli legelemibb műveletek blokkja
+
 Műveletek:
- - git: git repository checkout végrehajtása
- - sh: shell parancs futtatása
+
+- git: git repository checkout végrehajtása
+- sh: shell parancs futtatása
 ### Job definiálása kódból (Jenkins Configuration as Code)
 A letebb látható kódok létrehozhatók a felületen is. New item --> Pipeline. A következő oldal alján választhatjuk ki, hogy Pipeline script (azaz helyben, a Jenkinsen írt és tárolt) vagy Pipeline script from SCM (source code management, azaz gitben tárolt) beállításokat használjunk.<br>
 A jobok kódból történő definiálását a Configuration as Code plugin támogatja.
@@ -36,10 +39,11 @@ definition {
 }
 ```
 A konfiguráció részleteinek megértése nincs a kurzus keretei közt, ami fontos:
- - url: a Jenkinsfile (pipeline) git repóját definiáljuk
- - branch: az adott repó branchét definiálja ahol a pipeline fájl található
- - lightweight(): azt valósítja meg, hogy a Job futásakor CSAK a pipeline kód kerül letöltésre, nem az egész repó
- - scriptPath('filename'): az adott nevű pipeline fájlt fogja letölteni és végrehajtani a job
+
+- url: a Jenkinsfile (pipeline) git repóját definiáljuk
+- branch: az adott repó branchét definiálja ahol a pipeline fájl található
+- lightweight(): azt valósítja meg, hogy a Job futásakor CSAK a pipeline kód kerül letöltésre, nem az egész repó
+- scriptPath('filename'): az adott nevű pipeline fájlt fogja letölteni és végrehajtani a job
 #### Pipeline beégetve Job definitionba
 ```
 pipelineJob('CI - LOCAL') {

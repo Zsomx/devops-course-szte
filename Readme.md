@@ -2,6 +2,9 @@
 ## Purpose
 This material is used for education purposes at the University of Szeged (SZTE).
 The lecture notes & texts were written only in Hungarian right now.
+## Dcs and sources
+[GitHub pages](https://zsomx.github.io/devops-course-szte/)
+[Express Example app](https://github.com/Zsomx/express_example)
 ## Prerequisits 
 ### Vagrant environment
  - [VirtualBox](https://www.virtualbox.org/) = 6.0.12
@@ -17,7 +20,3 @@ The lecture notes & texts were written only in Hungarian right now.
 ```
 $ sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 ```
-
-## Next-gen docs (preview)
-
-[GitHub pages](https://zsomx.github.io/devops-course-szte/)

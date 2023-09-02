@@ -18,8 +18,8 @@ Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
     config.vm.network "private_network", ip: "192.168.56.5"
     config.vm.synced_folder "../docker", "/home/vagrant/docker_resources"
-    config.vm.provision "shell", inline: "docker-compose -f /home/vagrant/docker_resources/jenkins.yml up -d"
-    config.vm.provision "shell", inline: "docker-compose -f /home/vagrant/docker_resources/registry.yml up -d"
+    config.vm.provision "shell", inline: "docker compose -f /home/vagrant/docker_resources/jenkins.yml up -d"
+    config.vm.provision "shell", inline: "docker compose -f /home/vagrant/docker_resources/registry.yml up -d"
     config.vm.hostname = "jenkins"
     config.vm.provider "virtualbox" do |v|
       v.name = "JenkinsVM"

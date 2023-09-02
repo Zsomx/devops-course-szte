@@ -1,4 +1,4 @@
-version: "3.5" # Docker-Compose FÁJL verziója (ez a docker-compose verziójától függ)
+version: "3.5" # Docker-Compose FÁJL verziója (ez a docker compose verziójától függ)
 services: # Futtatni kívánt konténerek listája
   express: 
     build:

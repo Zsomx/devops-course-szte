@@ -24,10 +24,6 @@
             "inline": ["echo Docker install test: $(sudo docker --version)"]
         },
         {
-            "type": "ansible-local",
-            "playbook_file": "ansible/docker-compose-install.yaml"
-        },
-        {
             "type": "shell",
             "inline": ["echo Docker-Compose install test: $(sudo docker compose --version)"]
         }

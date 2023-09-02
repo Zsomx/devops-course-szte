@@ -6,7 +6,7 @@
             "add_force": true,
             "add_insecure": true,
             "provider": "virtualbox",
-            "source_path": "ubuntu/xenial64",
+            "source_path": "ubuntu/jammy64",
             "output_dir": "artifact"
         }
     ],

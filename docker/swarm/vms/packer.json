@@ -2,7 +2,7 @@
     "builders":[
         {
             "communicator": "ssh",
-            "source_path": "ubuntu/xenial64",
+            "source_path": "ubuntu/jammy64",
             "provider": "virtualbox",
             "type": "vagrant",
             "add_force": true,

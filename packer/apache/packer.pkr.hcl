@@ -1,5 +1,5 @@
 source "vagrant" "ubuntu" {
-  source_path  = "ubuntu/xenial64"
+  source_path  = "ubuntu/jammy64"
   provider     = "virtualbox"
   communicator = "ssh"
   output_dir   = "artifact"

@@ -27,6 +27,6 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["echo Docker-Compose install test: $(sudo docker-compose --version)"]
+    inline = ["echo Docker-Compose install test: $(sudo docker compose --version)"]
   }
 }

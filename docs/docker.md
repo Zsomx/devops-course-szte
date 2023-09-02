@@ -33,16 +33,16 @@ docker build -t ___image_neve:verzio___ .
 docker run -d --name ___kontener_neve___ ___image_neve:verzio___
 ```
 
-## Docker-Compose
+## Docker Compose
 Tekinthetjük a Docker egyfajta Vagrantfilejának. Egy összegző, YML mely a konténeres infrastruktúra összes elemét leírja. Definiálunk benne konténereket, port nyitásokat, volumeokat és hálózatokat. Egy fájlal kezelhetővé válik így több dockeres elem.<br>
 Compose fájl futtatása:
 ```
-docker-compose -f compose-file.yml up -d
+docker compose -f compose-file.yml up -d
 ```
 <br>
 Compose fájl leállítása (a volumeokat és secreteket nem törli):
 ```
-docker-compose -f compose-file.yml down
+docker compose -f compose-file.yml down
 ```
 
 ## Swarm

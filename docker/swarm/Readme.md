@@ -24,7 +24,7 @@ docker node update app-server --label-add cloudrole=appnode
 docker node update ops-base --label-add cloudrole=devopsnode
 ```
 ## 3. Deploy 
-Swarm esetén stackeket élesítünk, jelen helyzetben 1 docker-compose fájl = 1 stack.
+Swarm esetén stackeket élesítünk, jelen helyzetben 1 docker compose fájl = 1 stack.
 ```
 vagrant ssh ops_base
 cd /home/vagrant/docker_resources

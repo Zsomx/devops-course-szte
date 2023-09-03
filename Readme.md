@@ -12,7 +12,7 @@ The lecture notes & texts were written only in Hungarian right now.
  - [Ansible](https://www.ansible.com/resources/get-started) ~ 2.9.12 
 ### Docker-Swarm environment
  - [Docker](https://docs.docker.com/) >= 24.0.4
- - <s>[Docker-Compose](https://docs.docker.com/compose/) >= 1.26.2</s> Now included in Docker.
+ - <s>[Docker Compose](https://docs.docker.com/compose/) >= 1.26.2</s> Now included in Docker.
 ### Optionals
  - [Packer](https://www.packer.io/) >= 1.7.0
 ## Known issues:

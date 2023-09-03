@@ -2,7 +2,7 @@
     "builders":[
         {
             "communicator": "ssh",
-            "source_path": "ubuntu/xenial64",
+            "source_path": "ubuntu/jammy64",
             "provider": "virtualbox",
             "type": "vagrant",
             "add_force": true,
@@ -24,12 +24,8 @@
             "inline": ["echo Docker install test: $(sudo docker --version)"]
         },
         {
-            "type": "ansible-local",
-            "playbook_file": "ansible/docker-compose-install.yaml"
-        },
-        {
             "type": "shell",
-            "inline": ["echo Docker-Compose install test: $(sudo docker-compose --version)"]
+            "inline": ["echo Docker-Compose install test: $(sudo docker compose --version)"]
         }
     ]
 }

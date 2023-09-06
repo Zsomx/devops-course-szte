@@ -3,7 +3,7 @@
 A shebang az első sor egy Bash szkriptben, és megmondja a rendszernek, hogy melyik értelmezőt használja. A Bash szkriptek esetén általában így néz ki:<br>
 __#!/bin/bash__
 ## Változók
-Változót létrehozása értékadással:<br>
+Változók létrehozása értékadással:<br>
 ```shell
 name="John"
 ```
@@ -13,7 +13,7 @@ export name
 ```
 A változó értékét a $ szimbólum segítségével lehet elérni:
 ```shell
-echo "Helló, $name!"
+echo "Hello, $name!"
 ```
 ## Fájl és navigációs műveletek
 Leggyakoribbak: cd, touch, rm, mv, cp, és cat.
@@ -21,13 +21,13 @@ Leggyakoribbak: cd, touch, rm, mv, cp, és cat.
 A feltételes utasítások lehetővé teszik döntések meghozatalát a szkriptben:
 ```shell
 if [ "$age" -ge 18 ]; then
-  echo "Ön felnőtt."
+ echo "You are an adult"
 else
-  echo "Ön kiskorú."
+ echo "You are not an adult"
 fi
 ```
 ## Aritmetikai műveletek
-A (( )) segítségével lehet aritmetikai műveleteket végrehajtatni:
+A (( )) segítségével lehet aritmetikai műveleteket végrehajtani:
 ```shell
 score=$((5 + 3))
 echo "5 + 3 = $score"
@@ -38,8 +38,8 @@ aktualis_datum=$(date +%Y-%m-%d)
 ## Listák
 Létrehozása:
 ```shell
-exampleArray=("alma" "banán" "cseresznye")
-echo "Az első gyümölcs: ${exampleArray[0]}"
+exampleArray=("this" "is" "it")
+echo "First element: ${exampleArray[0]}"
 ```
 Parancs kimenetének tömbbé alakítása:
 ```shell
@@ -49,19 +49,19 @@ libContent=$(ls)
 A Bash támogatja a for és while ciklusokat listák bejárásához vagy parancsok ismételt végrehajtásához:
 ```shell
 for i in {1..5}; do
-  echo "$i"
+ echo "$i"
 done
 counter=0
 while [ $counter -lt 5 ]; do
-  echo "Counter: $counter"
-  ((szamlalo++))
+ echo "Counter: $counter"
+ ((counter++))
 done
 ```
 ## Függvények
-Függvények definiálása szokásos módon történik, annyi különbséggel hogy nincs argumentum listája. Ha szeretnénk bemeneti argumentumokat, $1 $2... stb. változókat tudjuk használni. 
+Függvények definiálása szokásos módon történik, annyi különbséggel hogy nincs argumentum listája. Ha szeretnénk bemeneti argumentumokat, $1 $2... stb. változókat tudjuk használni.
 ```shell
 function greet() {
-  echo "Helló, $1!"
+ echo "Hello, $1!"
 }
 
 greet "Alice"
@@ -71,8 +71,8 @@ Akár csak a függvények esetén:
 ```shell
 #!/bin/bash
 # File name: runthis.sh
-echo "Az első argumentum: $1"
-echo "A második argumentum: $2"
+echo "First arg: $1"
+echo "Second arg: $2"
 ```
 Szkript fájl futtatása:
 ```shell
@@ -82,15 +82,15 @@ Szkript fájl futtatása:
 A Bash lehetővé teszi a bemenet és kimenet átirányítását olyan szimbólumokkal, mint < a bemenet és > a kimenet számára.<br>
 Bemenet átirányítása fájlból
 ```shell
-cat < bemenet.txt
+cat < input_file.txt
 ```
 Kimenet átirányítása fájlba (felülírás)
 ```shell
-echo "Helló" > kimenet.txt
+echo "Hello" > output_file.txt
 ```
 Kimenet átirányítása fájlba (hozzáfűzés)
 ```shell
-echo "Világ" >> kimenet.txt
+echo "World" >> output_file.txt
 ```
 Érdemes utánanézni az stdin, stdout, stderr kifejezéseknek is.
 ## Pipe (|)
@@ -100,6 +100,4 @@ Kilistázza az összes fájlt az aktuális könyvtárban, majd továbbítja az e
 ls | grep ".txt"
 ```
 ## Exit code
-Minden Bash parancs visszaad egy kilépési státuszkódot. Az 0 érték sikert jelent, míg a nem nulla értékek hibát jeleznek. A legutóbbi program kilépési kódját a __$?__ változóval tudjuk lekérdezni. A __return__ kulcsszóval van lehetőségünk saját visszatérési értéked adni egy-egy szkriptnek.
-
-
+Minden Bash parancs visszaad egy kilépési státusz kódot. Az 0 érték sikert jelent, míg a nem nulla értékek hibát jeleznek. A legutóbbi program kilépési kódját a __$?__ változóval tudjuk lekérdezni. A __return__ kulcsszóval van lehetőségünk saját visszatérési értéket adni egy-egy szkriptnek.

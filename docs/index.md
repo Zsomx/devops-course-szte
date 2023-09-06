@@ -4,3 +4,4 @@ Ezen az oldalon találod a kurzushoz tartozó hivatalos jegyzeteket. Ezen felül
 
 **Kommunikáció: CooSpace fórum.**
 
+**Ha a jegyzetben bármilyen hibát találsz (nyelvtani, technikai... stb.), megköszönöm ha jelzed.**

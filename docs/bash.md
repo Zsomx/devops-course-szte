@@ -28,8 +28,10 @@ fi
 ```
 ## Aritmetikai műveletek
 A (( )) segítségével lehet aritmetikai műveleteket végrehajtatni:
+```shell
 score=$((5 + 3))
 echo "5 + 3 = $score"
+```
 ## Parancs beágyazás
 Lehetséges egy parancs kimenetét változóban tárolni a beágyazás segítségével:
 aktualis_datum=$(date +%Y-%m-%d)
@@ -98,6 +100,6 @@ Kilistázza az összes fájlt az aktuális könyvtárban, majd továbbítja az e
 ls | grep ".txt"
 ```
 ## Exit code
-Minden Bash parancs visszaad egy kilépési státuszkódot. Az 0 érték sikert jelent, míg a nem nulla értékek hibát jeleznek. A legutóbbi program kilépési kódját a $? változóval tudjuk lekérdezni. A __return__ kulcsszóval van lehetőségünk saját visszatérési értéked adni egy-egy szkriptnek.
+Minden Bash parancs visszaad egy kilépési státuszkódot. Az 0 érték sikert jelent, míg a nem nulla értékek hibát jeleznek. A legutóbbi program kilépési kódját a __$?__ változóval tudjuk lekérdezni. A __return__ kulcsszóval van lehetőségünk saját visszatérési értéked adni egy-egy szkriptnek.
 
 

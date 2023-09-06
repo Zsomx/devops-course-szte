@@ -2,6 +2,7 @@ site_name: SZTE DevOps Course
 nav:
   - Home: index.md
   - FAQ: faq.md
+  - Előismeretek: prereq.md
   - Bash áttekintés: bash.md
   - Linux alapok: linux.md
   - Vagrant: vagrant.md

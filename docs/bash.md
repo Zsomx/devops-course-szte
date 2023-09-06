@@ -1,4 +1,9 @@
 # Bash scripting (rövid ismétlés)
+Mivel a tárgy Msc hallgatóknak készült, ezért feltételezzük az Operációs rendszerek kurzus gyakorlati tudásának legalább részleges meglétét. 
+Amennyiben számodra ismeretlen teljesen a Linux és annak világa, vagy csak ismételnél egy nagyot, következő oktató videókat ajánljuk:
+
+- Ubuntu alapismeretek: https://www.youtube.com/watch?v=ROjZy1WbCIA
+- Shell scripting alapismeretek: https://www.youtube.com/watch?v=v-F3YLd6oMw
 ## Shebang (#!)
 A shebang az első sor egy Bash szkriptben, és megmondja a rendszernek, hogy melyik értelmezőt használja. A Bash szkriptek esetén általában így néz ki:<br>
 __#!/bin/bash__

@@ -1,5 +1,5 @@
 source "vagrant" "ubuntu" {
-  source_path  = "ubuntu/xenial64"
+  source_path  = "ubuntu/jammy64"
   provider     = "virtualbox"
   communicator = "ssh"
   output_dir   = "artifact"
@@ -21,12 +21,7 @@ build {
   provisioner "shell" {
     inline = ["echo Docker install test: $(sudo docker --version)"]
   }
-
-  provisioner "ansible-local" {
-    playbook_file = "ansible/docker-compose-install.yaml"
-  }
-
   provisioner "shell" {
-    inline = ["echo Docker-Compose install test: $(sudo docker-compose --version)"]
+    inline = ["echo Docker-Compose install test: $(sudo docker compose --version)"]
   }
 }

@@ -8,7 +8,7 @@ Ezt a fogalmat természetesen IT szempontból fogjuk értelmezni. Konfiguráció
  - a telepített OS beállításait és telepített programjait
  - egy telepített program beállításait
 
- A kurzus során már láthattuk az összes elemet, hiszen a Vagrantal a virtuális gépekhez emulált hardvert állítottunk be (CPU, RAM), az általuk használt hálózatot is definiáltuk, valamint egy kiválasztott OS-en eszközötünk változásokat és telepítéseket. 
+ A kurzus során már láthattuk az összes elemet, hiszen a Vagrantal a virtuális gépekhez virtualizált hardvert állítottunk be (CPU, RAM), az általuk használt hálózatot is definiáltuk, valamint egy kiválasztott OS-en eszközötünk változásokat és telepítéseket. 
 ### Deklaratív leírás
 Vagrant esetén Ruby nyelven definiáltunk mindent, mely egy imperatív nyelv. Leírtuk az egész folyamatot, hogy elérjük a kívánt eredményt. Röviden: a **hogyan** részt írtuk meg. 
 
@@ -21,7 +21,7 @@ Rally hasonlattal élve: a mitfárer mondja az irányt (**mit**), a versenyző k
 ### Mire használjuk?
 Bár sok esetben használható lenne, a kurzus során operációs rendszerek és azokra telepített szoftverek konfigurálására fogjuk bevetni. Ez a leggyakoribb alkalmazása is. 
 ### Playbook
-Ez a bemeneti YAML fájl. 2 dolgot kell mindenképpen tartalmaznia: hosts & tasks. A hosts modja meg, hogy a playbook milyen szerverekkel létesítsen kapcsolatot. A tasks pedig a szervereken elérendő állapotot írja le.
+Ez a bemeneti YAML fájl. 2 dolgot kell mindenképpen tartalmaznia: hosts & tasks. A hosts mondja meg, hogy a playbook milyen szerverekkel létesítsen kapcsolatot. A tasks pedig a szervereken elérendő állapotot írja le.
 ### Inventory
 A struktúráltság érdekében ezt is YAML-ként kezeljük. Itt a kezelni kívánt szerverek kapcsolódási adatait tároljuk. A szerverek akár csoportokba is szervezhetőek, így amikor egy playbook adott csoporton hajtódik végre, **párhuzamosan** történik a konfigurációjuk.
 ### Használata

@@ -15,7 +15,7 @@ AppServer VM beállítása: <br>
 A docker swarm join parancsot cseréljük ki a pontosan paraméterezettre, amit a fentebbi init parancs írt ki.
 ```
 vagrant ssh app_server
-docker swarm join --token $tokenstring 192.168.5.2:2377
+docker swarm join --token $tokenstring 192.168.56.2:2377
 ```
 Szerverek címkézése
 ```
@@ -24,7 +24,7 @@ docker node update app-server --label-add cloudrole=appnode
 docker node update ops-base --label-add cloudrole=devopsnode
 ```
 ## 3. Deploy 
-Swarm esetén stackeket élesítünk, jelen helyzetben 1 docker-compose fájl = 1 stack.
+Swarm esetén stackeket élesítünk, jelen helyzetben 1 docker compose fájl = 1 stack.
 ```
 vagrant ssh ops_base
 cd /home/vagrant/docker_resources

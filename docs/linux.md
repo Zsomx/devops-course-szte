@@ -1,35 +1,38 @@
 # Linux alapismeretek (ismétés)
-Mivel a tárgy Msc hallgatóknak készült, ezért feltételezzük az Operációs rendszerek kurzus gyakorlati tudásának legalább részleges meglétét. 
-Amennyiben számodra ismeretlen teljesen a Linux és annak világa, vagy csak ismételnél egy nagyot, következő oktató videókat ajánljuk:
-
-- Ubuntu alapismeretek: https://www.youtube.com/watch?v=ROjZy1WbCIA
-- Shell scripting alapismeretek: https://www.youtube.com/watch?v=v-F3YLd6oMw
-
 # Daemons & services
 ## Démonok azaz háttérben futó szolgáltatások kezelése
 Alapvetően 2 utasítást használunk erre: **systemctl** és a **service**.
 ### systemctl
-Ez a SystemD nevű programnak egy alprogramja tulajdonképpen. Az óra célja miatt, mi azonban csak a folyamat menedzsment részét fogjuk tárgyalni. Egy adott program démonként való futtatásához definiálni kell egy service fájlt, melyet az **/etc/systemd/system** helyen hozunk létre .service kiterjesztéssel. Ezen fájlok létrehozása az esetek többségében nem feladatunk. Kezeléséhez root jogosultság szükséges!
+Ez a SystemD nevű program CLI eszköze. Az óra rövidsége és fókuszáltsága okán, mi csak a folyamat menedzsment részét fogjuk tárgyalni főként.
+
+**Rövid elmélet**
+
+- Inializálja az egész OS-t
+- Unitokat kezel, számunkra a service típusú unit lesz érdekes
+- Unit definíciós fájlok 3 helyen találhatóak a Linuxon. Precedencia szint szerint:
+    - /etc/systemd/system
+    - /run/systemd/system
+    - /lib/systemd/system
 
 **Fontosabb parancsok**
 
- - systemctl start program-neve
- - systemctl stop program-neve
- - systemctl restart program-neve
- - systemctl enable program-neve:
+ - systemctl start ___program-neve___
+ - systemctl stop ___program-neve___
+ - systemctl restart ___program-neve___
+ - systemctl enable ___program-neve___:
     - Engedélyezi, hogy automatikusan az OS-el elinduljon a program.
- - systemctl disable program-neve:
+ - systemctl disable ___program-neve___:
     - Tiltja, hogy automatikusan elinduljon a program.
- - systemctl status program-neve:
+ - systemctl status ___program-neve___:
     - Program állapota, azaz fut-e? Mit futtat? Stb...
 #### /etc/init.d
-Vannak olyan esetek, amikor nem standard SystemD által alkalmazott fájlokkal dolgozunk. Ezek a fájlok az /etc/init vagy /etc/init.d mappákban landolnak. Ezeknek a felolvasását is elvégzi, ezek a legtöbb esetben standard shell script fájlok egy adott struktúrával.
+Vannak olyan esetek, amikor nem standard SystemD által alkalmazott fájlokkal dolgozunk. Ezek a fájlok az /etc/init vagy /etc/init.d mappákban landolnak. Ezeknek a felolvasását is elvégzi, melyek a esetben standard shell script fájlok egy adott struktúrával.
 ### service
-Mamár a **systemctl** az uralkodó ezen területen, azonban néhol fel-fel bukkanak olyan Linux kiadások amik más folyamat kezelőt használnak. Mivel nem egységes ezen területe sem teljesen a pingvines rendszernek, elkészült a **service** ___wrapper___ utasítás. Ez elmaszkolja előllünk a tényleges démon kezelőt így számunkra lényegtelen mi valósítja meg ezt a funkciót, ha tudjuk a **service** utasításait, tudjuk használni. Kezeléséhez root jogosultság szükséges!
+Ma már a **systemctl** az uralkodó ezen területen, azonban néhol fel-fel bukkanak olyan Linux kiadások amik más folyamat kezelőt használnak. Mivel nem egységes ezen területe sem teljesen a pingvines rendszernek, elkészült a **service** ___wrapper___ utasítás. Ez elmaszkolja előllünk a tényleges service kezelőt így számunkra lényegtelen mi valósítja meg ezt a funkciót, ha tudjuk a **service** utasításait, tudjuk használni.
 
 **Fontosabb parancsok**
 
- - service program-neve start
- - service program-neve stop
- - service program-neve restart
- - service program-neve status
+ - service ___program-neve___ start
+ - service ___program-neve___ stop
+ - service ___program-neve___ restart
+ - service ___program-neve___ status

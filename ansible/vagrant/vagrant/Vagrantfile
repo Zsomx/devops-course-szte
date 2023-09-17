@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
     ###Minden VM-re végrehajtódik###
-    config.vm.box = "ubuntu/xenial64"
+    config.vm.box = "ubuntu/jammy64"
     # Fájlokat másolunk a VM-ekre. NEM mappa szinkron.
     config.vm.provision "file", source: "../ansible", destination: "/home/vagrant/ansible"
     # Ansible natív futtatása a Vagrant által a létrehozott VM-ekre.
@@ -8,13 +8,9 @@ Vagrant.configure("2") do |config|
         ansible.playbook = "/home/vagrant/ansible/docker-install.yaml"
         ansible.become = true
     end
-    config.vm.provision "ansible_local" do |ansible|
-        ansible.playbook = "/home/vagrant/ansible/docker-compose-install.yaml"
-        ansible.become = true
-    end
     ###VMek egyéni, eltérő beállításai##
     config.vm.define "ops_base" do |d|
-      d.vm.network "private_network", ip: "192.168.2.2"
+      d.vm.network "private_network", ip: "192.168.56.2"
       d.vm.provider "virtualbox" do |v|
         v.name = "OpVM"
         v.memory = 1024
@@ -22,7 +18,7 @@ Vagrant.configure("2") do |config|
       end
     end
     config.vm.define "app_server" do |app|
-      app.vm.network "private_network", ip: "192.168.2.3"
+      app.vm.network "private_network", ip: "192.168.56.3"
       app.vm.provider "virtualbox" do |v|
         v.name = "AppVM"
         v.memory = 1024

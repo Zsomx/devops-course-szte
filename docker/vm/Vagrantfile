@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "ubuntu/jammy64"
+    config.vm.provision "file", source: "../../ansible/vagrant/ansible/docker-install.yaml", destination: "/home/vagrant/ansible/docker-install.yaml"
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "/home/vagrant/ansible/docker-install.yaml"
+        ansible.become = true
+    end
+    config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: "127.0.0.1"
+    config.vm.synced_folder "../cli", "/home/vagrant/docker_resources/cli"
+    config.vm.synced_folder "../compose", "/home/vagrant/docker_resources/compose"
+    config.vm.hostname = "dockervm"
+    config.vm.provider "virtualbox" do |v|
+      v.name = "Docker VM"
+      v.memory = 2048
+      v.cpus = 2
+    end
+  end

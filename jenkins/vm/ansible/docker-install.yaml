@@ -44,9 +44,11 @@
         state: latest
       vars:
         pkgs:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
     - name: Create docker group for sudoless usage
       group:
         name: docker

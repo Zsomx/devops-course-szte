@@ -2,9 +2,9 @@
 ## Purpose
 This material is used for education purposes at the University of Szeged (SZTE).
 The lecture notes & texts were written only in Hungarian right now.
-## Dcs and sources
-[GitHub pages](https://zsomx.github.io/devops-course-szte/)
-[Express Example app](https://github.com/Zsomx/express_example)
+## Docs and sources
+ - [GitHub pages](https://zsomx.github.io/devops-course-szte/)
+ - [Express Example app](https://github.com/Zsomx/express_example)
 ## Prerequisits 
 ### Vagrant environment
  - [VirtualBox](https://www.virtualbox.org/) = 6.0.12

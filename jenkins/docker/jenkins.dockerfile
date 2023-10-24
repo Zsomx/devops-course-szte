@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts-jdk8
+FROM jenkins/jenkins:lts
 
 RUN mkdir $JENKINS_HOME/casc_configs
 COPY ./config/plugins.txt $JENKINS_HOME/casc_configs/plugins.txt

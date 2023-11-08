@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     ns.vm.provision "shell", path: "app-deployment.sh"
     # Bekapcsolás esetén automatikusan elindítja a NodeJS szerver alkalmazást
     ns.trigger.after [:up, :reload] do |t|
-      t.run_remote = {inline: "cd express_example && npm start &"}
+      t.run_remote = {inline: "cd express_example && forever start ./bin/www"}
     end
   end
   #APACHE VM létrehozása
